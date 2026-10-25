@@ -396,11 +396,20 @@
 - 本仓职责仅限 gpu001（Ubuntu x86）上的 ComfyUI；勿在 AC922 上安装 ComfyUI，远程推理侧不在本仓改动范围
 - gpu001 经出口节点可直连外网与 GitHub SSH，默认不需要代理；禁擅自改代理/HTTPS remote 等操作并留下残留；遇网络问题先问再改
 - 构建与拉包禁用国内镜像源；镜像底包优先与宿主机一致的 Ubuntu，勿为“加速”改国内源
+- 服务端口默认对局域网与 Tailscale 开放（compose 勿仅绑 `127.0.0.1`）；须用户明示才收紧
+- 局域网内其它 Agent 应对已部署实例做完整操作；优先走官方 MCP/CLI，勿假定无 MCP
+- 云厂商 API 密钥由用户写入本机 `.env`（勿提交 Git）；Agent 只搭节点/模板，勿把密钥写进仓库或手册
 
 ## Learned Workspace Facts
 
 - ComfyUI 在 gpu001 以 Docker Compose 运行，宿主机入口 `8188`（compose `8188:8188`，对局域网/Tailscale 开放；本机可用 `http://127.0.0.1:8188`），同机其他项目勿再占 8188
+- 官方 `comfy-mcp` + `comfy-cli` 在 `Dockerfile.agent-tools`；`comfy-mcp-gateway` 宿主机 `8197`（`0.0.0.0`，SSE `/sse`）；Agent 优先 MCP，HTTP `:8188` 兜底；禁用 MCP/`comfy launch` 再起第二套 ComfyUI
 - 容器默认 CPU 模式（`python main.py --listen 0.0.0.0 --port 8188 --cpu`）；PyTorch 使用官方 CPU wheel
 - 目标架构：x86 上 ComfyUI 做编排/UI，远程 IBM AC922（ppc64le）提供局域网推理 API；本仓只部署 x86 侧容器
 - `docker-compose.yml` 开发阶段将仓库根目录 bind-mount 到容器 `/app`；升级流程为更新代码后重建镜像并 `compose up`，不在宿主机跑服务
+- Gitea：源码 remote `joyx`→`git@joy-x:wilber/ComfyUI.git`；Agent 手册仓 `~/project/ComfyUI_user`→`git@joy-x:wilber/ComfyUI_user.git`（先读 HANDOFF）
+- 全量镜像构建：kspeeder 拉底包打 tag + `DOCKER_BUILDKIT=0`；已有可用镜像时优先 pip 依赖增量层，避免重跑 apt
+- BYOK 多厂商云图/视频节点在 `custom_nodes/cloud_api_byok`；密钥模板 `.env.example`，真值只在 gitignore 的 `.env`；手册见 `ComfyUI_user` 的 BYOK 文档
+- TokenHub：国际站 `tokenhub-intl.tencentmaas.com` 与国内站 `tokenhub.tencentmaas.com` 的 Key/开通不可混用；chat 可用不等于生图已挂到同一 Key
+- TokenHub `hy-image-v3` 走 wand：`POST …/v1/wand/hunyuan-image/v3-generation`，勿当 `chat/completions` 用
 

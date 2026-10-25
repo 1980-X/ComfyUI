@@ -5,9 +5,15 @@ __pycache__/
 !/input/example.png
 /models/
 /temp/
-/custom_nodes/
+/custom_nodes/*
 !custom_nodes/example_node.py.example
+!custom_nodes/cloud_api_byok/
+!custom_nodes/cloud_api_byok/**
 extra_model_paths.yaml
+.env
+.env.local
+!.env.example
+
 /.vs
 .vscode/
 .idea/

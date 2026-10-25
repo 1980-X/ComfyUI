@@ -9,6 +9,9 @@ services:
     volumes:
       # 开发阶段绑定挂载，便于修改代码、工作流和配置
       - .:/app
+    env_file:
+      - path: .env
+        required: false
     environment:
       - CLI_ARGS=${CLI_ARGS:-}
     restart: unless-stopped
