@@ -8,6 +8,8 @@ date: 2026-10-24
 
 # Upgrade ComfyUI to upstream v0.42.5
 
+Agent / 日常操作手册见 Gitea [`wilber/ComfyUI_user`](http://192.168.1.84:18600/wilber/ComfyUI_user)（`git@joy-x:wilber/ComfyUI_user.git`），源码仓内摘要见 [`docs/ops/README.md`](../ops/README.md)。
+
 ## Goal Capsule
 
 - **Objective:** 本地 ComfyUI 工作区与官方上游 **v0.42.5** 对齐；现有 CPU Docker 部署方式仍可用，并能启动 UI、跑通一条基础工作流。
