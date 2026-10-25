@@ -18,8 +18,8 @@ IMAGE_MODELS = [
 ]
 VIDEO_MODELS: list[str] = []
 
-# Intl key from chat works on *.tencentmaas.com; domestic console keys use non-intl host.
-DEFAULT_BASE = "https://tokenhub-intl.tencentmaas.com/v1"
+# gpu001 current Key is domestic. Intl keys must set TOKENHUB_BASE_URL explicitly.
+DEFAULT_BASE = "https://tokenhub.tencentmaas.com/v1"
 GEN_PATH = "/wand/hunyuan-image/v3-generation"
 
 

@@ -410,6 +410,6 @@
 - Gitea：源码 remote `joyx`→`git@joy-x:wilber/ComfyUI.git`；Agent 手册仓 `~/project/ComfyUI_user`→`git@joy-x:wilber/ComfyUI_user.git`（先读 HANDOFF）
 - 全量镜像构建：kspeeder 拉底包打 tag + `DOCKER_BUILDKIT=0`；已有可用镜像时优先 pip 依赖增量层，避免重跑 apt
 - BYOK 多厂商云图/视频节点在 `custom_nodes/cloud_api_byok`；密钥模板 `.env.example`，真值只在 gitignore 的 `.env`；手册见 `ComfyUI_user` 的 BYOK 文档
-- TokenHub：国际站 `tokenhub-intl.tencentmaas.com` 与国内站 `tokenhub.tencentmaas.com` 的 Key/开通不可混用；chat 可用不等于生图已挂到同一 Key
-- TokenHub `hy-image-v3` 走 wand：`POST …/v1/wand/hunyuan-image/v3-generation`，勿当 `chat/completions` 用
+- TokenHub：国际站与国内站 Key/开通不可混用；现网生图默认国内 `tokenhub.tencentmaas.com`；chat 可用不等于生图已挂到同一 Key
+- TokenHub `hy-image-v3` 走 wand：`POST …/v1/wand/hunyuan-image/v3-generation`，勿当 `chat/completions`；`402`/`401009`=配额耗尽（运维加配额/换 Key），不是节点选错
 

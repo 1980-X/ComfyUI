@@ -35,6 +35,15 @@ def http_json(
     except Exception:
         payload = {"raw": resp.text[:2000]}
     if resp.status_code >= 400:
+        err = payload.get("error") if isinstance(payload, dict) else None
+        if isinstance(err, dict):
+            code = err.get("code")
+            zh = err.get("message_zh") or err.get("message") or ""
+            if resp.status_code == 402 or str(code) in ("401009", "402"):
+                raise RuntimeError(
+                    f"TokenHub 配额耗尽 HTTP {resp.status_code} code={code}: {zh} "
+                    f"（运维：控制台加配额或换 Key 后 recreate comfyui；Agent 勿改工作流/勿查 .env）"
+                )
         raise RuntimeError(f"HTTP {resp.status_code} {url}: {payload}")
     return payload
 
