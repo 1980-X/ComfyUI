@@ -9,6 +9,8 @@ __pycache__/
 !custom_nodes/example_node.py.example
 !custom_nodes/cloud_api_byok/
 !custom_nodes/cloud_api_byok/**
+custom_nodes/cloud_api_byok/**/__pycache__/
+custom_nodes/cloud_api_byok/**/*.py[cod]
 extra_model_paths.yaml
 .env
 .env.local
