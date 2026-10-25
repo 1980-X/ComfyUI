@@ -399,7 +399,7 @@
 
 ## Learned Workspace Facts
 
-- ComfyUI 在 gpu001 以 Docker Compose 运行，宿主机入口 `http://127.0.0.1:8188`（`127.0.0.1:8188:8188`），同机其他项目勿再占 8188
+- ComfyUI 在 gpu001 以 Docker Compose 运行，宿主机入口 `8188`（compose `8188:8188`，对局域网/Tailscale 开放；本机可用 `http://127.0.0.1:8188`），同机其他项目勿再占 8188
 - 容器默认 CPU 模式（`python main.py --listen 0.0.0.0 --port 8188 --cpu`）；PyTorch 使用官方 CPU wheel
 - 目标架构：x86 上 ComfyUI 做编排/UI，远程 IBM AC922（ppc64le）提供局域网推理 API；本仓只部署 x86 侧容器
 - `docker-compose.yml` 开发阶段将仓库根目录 bind-mount 到容器 `/app`；升级流程为更新代码后重建镜像并 `compose up`，不在宿主机跑服务
