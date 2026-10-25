@@ -1,0 +1,43 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*.pyo
+.venv
+venv
+venv-*
+
+# 运行时生成，无需打进镜像
+output/
+input/
+temp/
+*.log
+
+# 模型体积大，通过挂载使用
+models/
+
+# 自定义节点通过挂载
+custom_nodes/
+
+# IDE 与工具
+.vscode
+.idea
+.vs
+.cursor
+docs/
+
+# 测试与文档
+tests/
+tests-unit/
+*.md
+!README.md
+
+# 其他
+.DS_Store
+web_custom_versions/
+openapi.yaml
+filtered-openapi.yaml
+uv.lock

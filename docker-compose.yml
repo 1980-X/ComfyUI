@@ -1,0 +1,14 @@
+services:
+  comfyui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: comfyui
+    ports:
+      - "127.0.0.1:8188:8188"
+    volumes:
+      # 开发阶段绑定挂载，便于修改代码、工作流和配置
+      - .:/app
+    environment:
+      - CLI_ARGS=${CLI_ARGS:-}
+    restart: unless-stopped

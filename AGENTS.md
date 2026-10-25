@@ -388,3 +388,19 @@
 - In reviews, prioritize real user impact: crashes, wrong dtype/device behavior,
   memory regressions, broken model loading, workflow incompatibility, and noisy
   or misleading user-facing output.
+
+## Learned User Preferences
+
+- 始终用中文沟通
+- ComfyUI 必须容器化部署与升级；禁止在宿主机直接安装依赖或跑服务
+- 本仓职责仅限 gpu001（Ubuntu x86）上的 ComfyUI；勿在 AC922 上安装 ComfyUI，远程推理侧不在本仓改动范围
+- gpu001 经出口节点可直连外网与 GitHub SSH，默认不需要代理；禁擅自改代理/HTTPS remote 等操作并留下残留；遇网络问题先问再改
+- 构建与拉包禁用国内镜像源；镜像底包优先与宿主机一致的 Ubuntu，勿为“加速”改国内源
+
+## Learned Workspace Facts
+
+- ComfyUI 在 gpu001 以 Docker Compose 运行，宿主机入口 `http://127.0.0.1:8188`（`127.0.0.1:8188:8188`），同机其他项目勿再占 8188
+- 容器默认 CPU 模式（`python main.py --listen 0.0.0.0 --port 8188 --cpu`）；PyTorch 使用官方 CPU wheel
+- 目标架构：x86 上 ComfyUI 做编排/UI，远程 IBM AC922（ppc64le）提供局域网推理 API；本仓只部署 x86 侧容器
+- `docker-compose.yml` 开发阶段将仓库根目录 bind-mount 到容器 `/app`；升级流程为更新代码后重建镜像并 `compose up`，不在宿主机跑服务
+
