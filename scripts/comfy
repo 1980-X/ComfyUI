@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Containerized comfy-cli against the running ComfyUI compose service.
+# Usage: scripts/comfy [--help] | scripts/comfy env | …
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+# Prefer compose DNS name when on the compose network; override for host-side debugging.
+export COMFYUI_URL="${COMFYUI_URL:-http://comfyui:8188}"
+
+exec docker compose --profile tools run --rm \
+  -e "COMFYUI_URL=${COMFYUI_URL}" \
+  -e COMFY_NO_TELEMETRY=1 \
+  -e DO_NOT_TRACK=1 \
+  comfy-tools \
+  comfy "$@"

@@ -12,3 +12,53 @@ services:
     environment:
       - CLI_ARGS=${CLI_ARGS:-}
     restart: unless-stopped
+
+  # One-shot / interactive CLI: docker compose --profile tools run --rm comfy-tools comfy …
+  comfy-tools:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent-tools
+    image: comfyui-agent-tools:latest
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+    environment:
+      COMFYUI_URL: ${COMFYUI_URL:-http://comfyui:8188}
+      COMFY_NO_TELEMETRY: "1"
+      DO_NOT_TRACK: "1"
+    profiles:
+      - tools
+    networks:
+      - default
+
+  # LAN/Tailscale MCP gateway (SSE + streamable HTTP) → comfy-mcp → ComfyUI
+  comfy-mcp-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent-tools
+    image: comfyui-agent-tools:latest
+    container_name: comfy-mcp-gateway
+    depends_on:
+      - comfyui
+    ports:
+      - "8197:8197"
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    environment:
+      COMFYUI_URL: ${COMFYUI_URL:-http://comfyui:8188}
+      COMFY_NO_TELEMETRY: "1"
+      DO_NOT_TRACK: "1"
+    # stdio comfy-mcp bridged for remote MCP clients (Cursor etc.)
+    command:
+      - supergateway
+      - --stdio
+      - comfy-mcp
+      - --port
+      - "8197"
+      - --host
+      - "0.0.0.0"
+      - --cors
+      - --healthEndpoint
+      - /healthz
+    restart: unless-stopped

@@ -1,0 +1,28 @@
+# gpu001：python/node 均经 kspeeder 拉取后 docker tag，再用
+#   DOCKER_BUILDKIT=0 docker compose build comfy-mcp-gateway
+# （避免 BuildKit 强查 Docker Hub；也避免 deb.debian.org 装 nodejs）
+FROM node:22-bookworm-slim AS nodebin
+
+FROM python:3.11-slim
+
+# Copy Node/npm from official node image (no apt nodejs package)
+COPY --from=nodebin /usr/local/bin/node /usr/local/bin/node
+COPY --from=nodebin /usr/local/lib/node_modules /usr/local/lib/node_modules
+RUN ln -sf /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
+    && ln -sf /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx \
+    && node -v && npm -v
+
+WORKDIR /workspace
+
+# Official agent stack (mcp>=2). LAN bridge: Node supergateway (mcp-proxy needs mcp<2).
+RUN pip install --no-cache-dir \
+    "comfy-cli>=1.14.0" \
+    "comfy-mcp>=0.10.0" \
+    && npm install -g supergateway@4.2.1 \
+    && npm cache clean --force
+
+ENV COMFYUI_URL=http://comfyui:8188
+ENV COMFY_NO_TELEMETRY=1
+ENV DO_NOT_TRACK=1
+
+CMD ["comfy", "--help"]
