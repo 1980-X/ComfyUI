@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "transcripts": {
+    "/home/wilber/.cursor/projects/home-wilber-project-ComfyUI/agent-transcripts/09f3cc07-3bd2-4527-9548-1f0b110ed0bf/09f3cc07-3bd2-4527-9548-1f0b110ed0bf.jsonl": {
+      "mtimeMs": 1773301067677.9534
+    },
+    "/home/wilber/.cursor/projects/home-wilber-project-ComfyUI/agent-transcripts/2366e750-ceb9-4fb7-8a4d-9a4f4ee1fbf0/2366e750-ceb9-4fb7-8a4d-9a4f4ee1fbf0.jsonl": {
+      "mtimeMs": 1792939152512.6782
+    },
+    "/home/wilber/.cursor/projects/home-wilber-project-ComfyUI/agent-transcripts/2366e750-ceb9-4fb7-8a4d-9a4f4ee1fbf0/subagents/4d9189b7-c22c-4bb8-8704-ade692e10356.jsonl": {
+      "mtimeMs": 1792854597901.5137
+    },
+    "/home/wilber/.cursor/projects/home-wilber-project-ComfyUI/agent-transcripts/2366e750-ceb9-4fb7-8a4d-9a4f4ee1fbf0/subagents/65d8d1a5-ef26-4338-91ae-1789fa6b686b.jsonl": {
+      "mtimeMs": 1792902002836.2173
+    },
+    "/home/wilber/.cursor/projects/home-wilber-project-ComfyUI/agent-transcripts/2366e750-ceb9-4fb7-8a4d-9a4f4ee1fbf0/subagents/6cbbe6a5-00b6-4f95-979f-066ba599a8fa.jsonl": {
+      "mtimeMs": 1792939217571.8574
+    },
+    "/home/wilber/.cursor/projects/home-wilber-project-ComfyUI/agent-transcripts/3cc481cf-018f-40ea-8604-fef1cc5f35d3/3cc481cf-018f-40ea-8604-fef1cc5f35d3.jsonl": {
+      "mtimeMs": 1784481909482.021
+    },
+    "/home/wilber/.cursor/projects/home-wilber-project-ComfyUI/agent-transcripts/3cc481cf-018f-40ea-8604-fef1cc5f35d3/subagents/5969b644-1706-4d8a-80b8-80156cf1da7a.jsonl": {
+      "mtimeMs": 1784481896151.623
+    },
+    "/home/wilber/.cursor/projects/home-wilber-project-ComfyUI/agent-transcripts/5969b644-1706-4d8a-80b8-80156cf1da7a/5969b644-1706-4d8a-80b8-80156cf1da7a.jsonl": {
+      "mtimeMs": 1784481910928.0642
+    }
+  }
+}
